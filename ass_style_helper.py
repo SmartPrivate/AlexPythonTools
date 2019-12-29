@@ -1,8 +1,10 @@
 import os
 import sys
 
-default_style='Style: Default,STKaiti,20,&H00E0E0E0,&H0000FFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,1,1,2,1,1,5,1'
-eng_style='{\\fnCronos Pro Subhead\\fs14\\1c&H3CF1F3&}'
+default_style = 'Style: Default,Microsoft YaHei,20,&H00E0E0E0,&H0000FFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,1,1,2,1,1,5,1\n'
+eng_style = '{\\fnCronos Pro Subhead\\fs14\\1c&H3CF1F3&}'
+shadow_style = 'ScaledBorderAndShadow: no\n'
+
 
 def add_style(input_ass, output_ass):
     reader = open(input_ass, 'r', encoding='utf-8')
@@ -12,6 +14,8 @@ def add_style(input_ass, output_ass):
         new_line = line
         if line.startswith('Style:'):
             new_line = default_style
+        if line.startswith('ScaledBorderAndShadow'):
+            new_line = shadow_style
         if '\\N' in line:
             new_line = add_eng_effect(line)
             new_line = add_blur_effect(new_line)
